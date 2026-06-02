@@ -1,19 +1,9 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { Link } from "react-router-dom";
 import { PageShell } from "@/components/statrush/PageShell";
 import { players } from "@/lib/statrush-data";
 import { TrendBadge, MomentumBadge } from "@/components/statrush/Trend";
 
-export const Route = createFileRoute("/players/")({
-  head: () => ({
-    meta: [
-      { title: "Players — StatRush" },
-      { name: "description", content: "Browse every World Cup player with live Impact Scores and trends." },
-    ],
-  }),
-  component: Players,
-});
-
-function Players() {
+export default function PlayersIndex() {
   return (
     <PageShell>
       <h1 className="text-3xl font-bold">All Players</h1>
@@ -23,8 +13,7 @@ function Players() {
         {players.map((p) => (
           <Link
             key={p.rank}
-            to="/players/$id"
-            params={{ id: String(p.rank) }}
+            to={`/players/${p.rank}`}
             className="rounded-2xl border border-border bg-surface-grad p-4 row-hover"
           >
             <div className="flex items-start justify-between">

@@ -1,17 +1,6 @@
-import { createFileRoute } from "@tanstack/react-router";
 import { PageShell } from "@/components/statrush/PageShell";
 import { liveEvents, players, upcomingMatches } from "@/lib/statrush-data";
 import { TrendBadge } from "@/components/statrush/Trend";
-
-export const Route = createFileRoute("/matches")({
-  head: () => ({
-    meta: [
-      { title: "Match Center — StatRush" },
-      { name: "description", content: "Live match center with real-time events and per-match Impact leaders." },
-    ],
-  }),
-  component: Matches,
-});
 
 const stats = [
   { label: "Possession", a: 58, b: 42 },
@@ -22,7 +11,7 @@ const stats = [
   { label: "Fouls", a: 8, b: 11 },
 ];
 
-function Matches() {
+export default function Matches() {
   return (
     <PageShell>
       <h1 className="text-3xl font-bold">Match Center</h1>

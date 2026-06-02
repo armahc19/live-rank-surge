@@ -1,23 +1,10 @@
-import { createFileRoute } from "@tanstack/react-router";
 import { Flame } from "lucide-react";
 import { PageShell } from "@/components/statrush/PageShell";
 import { Leaderboard } from "@/components/statrush/Leaderboard";
 import { MarketMovers } from "@/components/statrush/MarketMovers";
 import { players } from "@/lib/statrush-data";
 
-export const Route = createFileRoute("/rankings")({
-  head: () => ({
-    meta: [
-      { title: "Live Rankings — StatRush" },
-      { name: "description", content: "Live World Cup player rankings sorted by Impact Score, updated in real time." },
-      { property: "og:title", content: "Live Rankings — StatRush" },
-      { property: "og:description", content: "World Cup 2026 — live Impact Score leaderboard." },
-    ],
-  }),
-  component: Rankings,
-});
-
-function Rankings() {
+export default function Rankings() {
   const top = players[0];
   return (
     <PageShell>

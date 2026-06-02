@@ -1,16 +1,5 @@
-import { createFileRoute } from "@tanstack/react-router";
 import { PageShell } from "@/components/statrush/PageShell";
 import { groups, upcomingMatches } from "@/lib/statrush-data";
-
-export const Route = createFileRoute("/tournament")({
-  head: () => ({
-    meta: [
-      { title: "Tournament — StatRush" },
-      { name: "description", content: "World Cup 2026 bracket, group standings, fixtures and knockout progress." },
-    ],
-  }),
-  component: Tournament,
-});
 
 const bracket = [
   { stage: "Round of 16", teams: ["France vs Senegal", "Brazil vs Japan", "Spain vs Croatia", "England vs USA", "Argentina vs Mexico", "Germany vs Belgium", "Portugal vs Netherlands", "Uruguay vs Morocco"] },
@@ -19,7 +8,7 @@ const bracket = [
   { stage: "Final", teams: ["TBD vs TBD"] },
 ];
 
-function Tournament() {
+export default function Tournament() {
   return (
     <PageShell>
       <header className="mb-6">

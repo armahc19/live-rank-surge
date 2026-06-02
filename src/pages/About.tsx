@@ -1,17 +1,6 @@
-import { createFileRoute } from "@tanstack/react-router";
 import { PageShell } from "@/components/statrush/PageShell";
 
-export const Route = createFileRoute("/about")({
-  head: () => ({
-    meta: [
-      { title: "About — StatRush" },
-      { name: "description", content: "StatRush is the stock market for football players — live Impact Scores for every World Cup player." },
-    ],
-  }),
-  component: About,
-});
-
-function About() {
+export default function About() {
   return (
     <PageShell>
       <div className="mx-auto max-w-3xl">

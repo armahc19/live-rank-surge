@@ -1,29 +1,8 @@
-import { createFileRoute, Link, notFound } from "@tanstack/react-router";
+import { Link, useParams } from "react-router-dom";
 import { ArrowLeft } from "lucide-react";
 import { PageShell } from "@/components/statrush/PageShell";
 import { players } from "@/lib/statrush-data";
 import { TrendBadge, MomentumBadge } from "@/components/statrush/Trend";
-
-export const Route = createFileRoute("/players/$id")({
-  head: ({ params }) => {
-    const p = players.find((pp) => String(pp.rank) === params.id);
-    return {
-      meta: [
-        { title: p ? `${p.player} — StatRush` : "Player — StatRush" },
-        { name: "description", content: p ? `${p.player} (${p.team}) — Impact ${p.score.toFixed(1)}, ${p.goals}G ${p.assists}A.` : "Player profile" },
-      ],
-    };
-  },
-  component: PlayerProfile,
-  notFoundComponent: () => (
-    <PageShell><p className="text-body">Player not found.</p></PageShell>
-  ),
-  loader: ({ params }) => {
-    const p = players.find((pp) => String(pp.rank) === params.id);
-    if (!p) throw notFound();
-    return p;
-  },
-});
 
 const matchHistory = [
   { match: "M1", score: 7.2, opp: "Canada" },
@@ -44,8 +23,21 @@ const events = [
   ]},
 ];
 
-function PlayerProfile() {
-  const p = Route.useLoaderData();
+export default function PlayerProfile() {
+  const { id } = useParams<{ id: string }>();
+  const p = players.find((pp) => String(pp.rank) === id);
+
+  if (!p) {
+    return (
+      <PageShell>
+        <p className="text-body">Player not found.</p>
+        <Link to="/rankings" className="mt-4 inline-flex items-center gap-1 text-sm text-primary">
+          <ArrowLeft className="h-4 w-4" /> Back to rankings
+        </Link>
+      </PageShell>
+    );
+  }
+
   const max = Math.max(...matchHistory.map((m) => m.score));
   const min = Math.min(...matchHistory.map((m) => m.score));
   const range = Math.max(max - min, 0.5);
@@ -55,7 +47,7 @@ function PlayerProfile() {
     const y = h - pad - ((m.score - min) / range) * (h - pad * 2);
     return { x, y, ...m };
   });
-  const path = pts.map((p, i) => `${i === 0 ? "M" : "L"}${p.x},${p.y}`).join(" ");
+  const path = pts.map((pt, i) => `${i === 0 ? "M" : "L"}${pt.x},${pt.y}`).join(" ");
   const area = `${path} L${pts[pts.length-1].x},${h-pad} L${pts[0].x},${h-pad} Z`;
 
   return (

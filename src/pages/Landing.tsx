@@ -1,22 +1,10 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { Link } from "react-router-dom";
 import { ArrowRight, Activity, TrendingUp, Flame, BarChart3, Zap } from "lucide-react";
 import { players } from "@/lib/statrush-data";
 import { TrendBadge } from "@/components/statrush/Trend";
 import { AppHeader } from "@/components/statrush/AppHeader";
 
-export const Route = createFileRoute("/")({
-  head: () => ({
-    meta: [
-      { title: "StatRush — Real-Time Football Rankings" },
-      { name: "description", content: "The stock market for football players. Live World Cup rankings, Impact Scores, and market movers." },
-      { property: "og:title", content: "StatRush — Real-Time Football Rankings" },
-      { property: "og:description", content: "Track every player. Watch rankings change live. See who dominates the tournament." },
-    ],
-  }),
-  component: Landing,
-});
-
-function Landing() {
+export default function Landing() {
   return (
     <div className="min-h-screen bg-background">
       <AppHeader />
@@ -44,7 +32,6 @@ function Landing() {
             </div>
           </div>
 
-          {/* Floating leaderboard preview */}
           <div className="relative">
             <div className="glass rounded-2xl p-5 shadow-card">
               <div className="mb-4 flex items-center justify-between">
